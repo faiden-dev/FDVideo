@@ -1,72 +1,31 @@
-import { StrictMode, useEffect, useState } from "react";
-import { createRoot } from "react-dom/client";
+import { StrictMode } from 'react';
+import { createRoot } from 'react-dom/client';
+import HomePage from './pages/home';
 
-import Editor from "./pages/editor";
-import Files from "./pages/files";
+/* === Styles import block */
 
-function App() {
-    const [page, setPage] = useState("files");
+import './config/theme.css';
+import './config/main.css';
+import './styles/theme.css';
 
-    // changes the page and updates the URL without reloading the page
-    function changePage(value: string) {
-        setPage(value);
-        window.history.pushState({}, "", `/${value}`);
-    }
 
-    // handles the click event for the link
-    function handleFilesClick(e: React.MouseEvent<HTMLAnchorElement>) {
-        e.preventDefault();
-        changePage("files");
-    }
 
-    function handleEditorClick(e: React.MouseEvent<HTMLAnchorElement>) {
-        e.preventDefault();
-        changePage("editor");
-    }
+/* === Navigation block */
 
-    // sets the initial page based on the URL and listens for popstate events
-    useEffect(() => {
-        const path = window.location.pathname.replace("/", "");
-
-        if (path === "editor" || path === "files") {
-            setPage(path);
-        } else {
-            setPage("files");
-            window.history.replaceState({}, "", "/files");
-        }
-
-        window.onpopstate = () => {
-            const path = window.location.pathname.replace("/", "");
-            setPage(path || "files");
-        };
-    }, []);
-
-    // updates the document title based on the current page
-    useEffect(() => {
-        document.title = `${page === "editor" ? "Editor" : "Files"} - FDVideo`;
-    }, [page]);
-
-    // renders the links and the current page component
-    return (
-        <>
-            <a href="/files" onClick={handleFilesClick}>
-                Files
-            </a>
-
-            {" | "}
-
-            <a href="/editor" onClick={handleEditorClick}>
-                Editor
-            </a>
-
-            {page === "editor" ? <Editor/> : <Files/>}
-        </>
-    );
+// Redirect root path to home page
+if (window.location.pathname === '/' || window.location.pathname === '') {
+    window.history.replaceState(null, '', '/home');
 }
 
-// renders the App component inside the root element
-createRoot(document.getElementById("root")!).render(
-    <StrictMode>
-        <App/>
-    </StrictMode>,
-);
+
+
+/* === Application entry point block */
+
+// Render main application
+const rootElement = document.getElementById('root');
+
+if (rootElement) {
+    createRoot(rootElement).render(
+        <HomePage />
+    );
+}

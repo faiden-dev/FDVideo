@@ -1,0 +1,13 @@
+/* === Theme configuration block */
+
+/* Dark theme (default) */
+:root {
+    --color-background: #121212;
+    --color-text: #ffffff;
+}
+
+/* Light theme */
+[data-theme='light'] {
+    --color-background: #ffffff;
+    --color-text: #000000;
+}

@@ -13,7 +13,7 @@ FDVideo is a desktop-oriented video editor for creating, editing and managing vi
 ## Project structure
 
 - `src` - application source code
-- `src/pages` - application pages
+- `docs` - project documentation
 - `index.html` - main HTML entry point
 
 ## Commands

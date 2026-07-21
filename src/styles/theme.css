@@ -1,0 +1,6 @@
+/* === Global base styles block */
+
+body {
+    background-color: var(--color-background);
+    color: var(--color-text);
+}
