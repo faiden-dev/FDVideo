@@ -1,17 +1,26 @@
 /* === Import block */
 
-import { useState } from "react";
-
-/* --- declare window interface */
-declare global {
-    interface Window {
-        showDirectoryPicker(): Promise<FileSystemDirectoryHandle>;
-    }
-}
+import { useEffect, useState } from "react";
 
 
 
 /* === Projects viewing block */
+
+/* --- Load projects */
+async function loadProjects(setProjects: React.Dispatch<React.SetStateAction<string[]>>) {
+    try {
+        const response = await fetch("http://localhost:3001/files");
+        const data = await response.json() as string[] | { error: string };
+
+        if (Array.isArray(data)) {
+            setProjects(data);
+        } else {
+            setProjects([]);
+        }
+    } catch {
+        setProjects([]);
+    }
+}
 
 /* --- Create projects view */
 function createProjectsView(projects: string[]) {
@@ -27,28 +36,13 @@ export default function ProjectsViewing() {
     const [projects, setProjects] = useState<string[]>([]);
     const projectsView = createProjectsView(projects);
 
-    /* --- Select folder */
-    async function selectFolder() {
-        const handle = await window.showDirectoryPicker();
-
-        const files: string[] = [];
-
-        for await (const entry of handle.values()) {
-            if (entry.kind === "file") {
-                files.push(entry.name);
-            }
-        }
-
-        setProjects(files);
-    }
+    useEffect(() => {
+        void loadProjects(setProjects);
+    }, []);
 
     // Render projects viewing content
     return (
         <div>
-            <button onClick={selectFolder}>
-                Select folder
-            </button>
-
             {projectsView}
         </div>
     );

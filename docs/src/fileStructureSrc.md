@@ -35,6 +35,15 @@
 
 
 
+## Server
+
+### server
+
+- Contains the local Node.js server.
+- Provides file system access and application APIs.
+
+
+
 ## Resources
 
 ### config
