@@ -1,0 +1,30 @@
+/* Main */
+#projectsViewingContainer {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: calc(var(--spacing) * 1.5);
+}
+
+
+
+/* Project Card */
+#projectsViewingContainer .card {
+    width: 100%;
+    padding: 0px var(--spacing);
+    cursor: pointer;
+}
+
+#projectsViewingContainer .card .img {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+}
+
+#projectsViewingContainer .card .name {
+    margin-top: calc(var(--spacing) / 2);
+    text-align: center;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}

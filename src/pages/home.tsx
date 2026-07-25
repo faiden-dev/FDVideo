@@ -20,9 +20,7 @@ export default function HomePage() {
             </header>
 
             <main id="content">
-                <div id="projectsViewingContainer">
-                    <ProjectsViewing />
-                </div>
+                <ProjectsViewing />
             </main>
         </div>
     );
